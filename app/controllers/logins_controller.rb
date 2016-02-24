@@ -8,5 +8,16 @@
 
 # Shows the form for a user to create a new login session
 MyApp.get "/logins/new" do
-  
+  erb :"logins/new"
 end
+
+# Processes the form that creates a new login session for a user
+MyApp.post "/logins/create" do
+  @user = User.find_by_email(params["email"])
+  if @user.password == params["password"]
+    session["user_id"] = @user.id
+     erb :"logins/success"
+  else
+    erb :"logins/failed"
+  end
+end 
