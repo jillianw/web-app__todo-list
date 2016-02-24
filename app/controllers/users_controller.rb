@@ -34,21 +34,30 @@ MyApp.get "/view_one/:num" do
   erb :"users/view_one"
 end
 
-# Processes deletion of a user
-MyApp.get "/delete_user/:b" do
-  @delete_user = User.find_by_id(params[:b]) 
-  @this_user_todo_lists = Todo.where({"user_id" => params[:b]})
+# Processes deletion of a user (from view_all page)
+MyApp.get "/delete_user/:num" do
+  @delete_user = User.find_by_id(params[:num]) 
+  @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
   @this_user_todo_lists.delete_all
   @delete_user.delete
 
   erb :"users/delete"
 end
 
-# Updating......
-
-MyApp.post "/update_user" do
-  @update_user = User.all 
+#Shows form for updating a user
+MyApp.get "/update_user/:num" do 
+  @user_update = User.find_by_id(params[:num]) 
 
   erb :"users/update"
 end
 
+#Processes the form for updating a user (from view_all page)
+MyApp.post "/updated_user/:num" do 
+  @update_user = User.find_by_id(params[:num])
+  @update_user.name = params["name"]
+  @update_user.email = params["email"]
+  @update_user.password = params["password"]
+  @update_user.save
+
+  erb :"users/updated"
+end

@@ -9,7 +9,9 @@
   <form action="delete_user/<%= x.id %>" method "get">
     <input type="submit" value="Delete">
   </form>
-  <br>
+    <form action="update_user/<%= x.id %>" method "post">
+    <input type="submit" value="Update">
+  </form>
 <% end %>
 
 <br>

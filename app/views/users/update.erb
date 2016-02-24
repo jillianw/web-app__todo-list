@@ -1,0 +1,18 @@
+<p>Update user information:</p>
+<br>
+
+<form action="/updated_user/<%= @user_update.id %>" method="post">
+  <p>
+    Name:
+    <input type="text" name="name" value="<%= @user_update.name %>">
+  </p>
+  <p> 
+    Email:
+    <input type="text" name"email" value="<%= @user_update.email %>">
+  </p>
+  <p> 
+    Password:
+    <input type="text" name"password" value="<%= @user_update.password %>">
+  </p>
+  <input type ="submit">
+</form>
