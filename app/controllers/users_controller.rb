@@ -35,7 +35,7 @@ MyApp.get "/view_one/:num" do
 end
 
 # Processes deletion of a user
-MyApp.post "/delete_user/:b" do
+MyApp.get "/delete_user/:b" do
   @delete_user = User.find_by_id(params[:b]) 
   @this_user_todo_lists = Todo.where({"user_id" => params[:b]})
   @this_user_todo_lists.delete_all
