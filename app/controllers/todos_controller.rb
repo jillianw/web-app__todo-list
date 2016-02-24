@@ -1,1 +1,61 @@
 # This controller is for all the CRUD operations related to a Todo.
+
+# Shows the form for adding a to do list
+MyApp.get "/new_todo" do 
+  erb :"todos/add"
+end
+
+# Processes the form for adding a to do list
+MyApp.post "/todo_added" do 
+  @todo = Todo.new
+  @todo.title = params["title"]
+  @todo.description = params["description"]
+  if @todo.is_valid == true
+    @todo.save
+    erb :"todos/added"
+  else
+    erb :"todos/error"
+  end
+end
+
+# Shows all to do lists added
+MyApp.get "/all_todos" do 
+  @all_users = Todo.all 
+  erb :"todos/view_all"
+end
+
+# Shows one to do list
+MyApp.get "/view_one/:num" do 
+  @one_user = Todo.find_by_id(params[:num])
+
+  erb :"todos/view_one"
+end
+
+# Processes deletion of a to do list (from view_all page)
+MyApp.get "/delete_todo/:num" do
+  @delete_user = Todo.find_by_id(params[:num]) 
+  @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
+  @this_user_todo_lists.delete_all
+  @delete_user.delete
+  erb :"todos/delete"
+end
+
+#Shows form for updating a to do list
+MyApp.get "/update_todo/:num" do 
+  @user_update = Todo.find_by_id(params[:num]) 
+  erb :"todos/update"
+end
+
+#Processes the form for updating a to do list
+MyApp.post "/updated_todo/:num" do 
+  @update_user = Todo.find_by_id(params[:num])
+  @update_user.name = params["name"]
+  @update_user.email = params["email"]
+  @update_user.password = params["password"]
+  if @update_user.is_valid == true
+    @update_user.save
+    erb :"todos/updated"
+  else
+    erb :"todos/error"
+  end
+end
