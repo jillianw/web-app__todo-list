@@ -6,3 +6,7 @@
 # 
 # Reading and Updating a login, however, make a little less sense.
 
+# Shows the form for a user to create a new login session
+MyApp.get "/logins/new" do
+  
+end
