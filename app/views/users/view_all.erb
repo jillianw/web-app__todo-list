@@ -1,0 +1,18 @@
+<p>All users:</p>
+
+<% @user.each do |x| %>
+  <p>
+    <a href="view_one/<%= x.id %>">
+      <%= x.name %>
+    </a>
+  </p>
+  <form action="delete_user/<%= x.id %>" method "post">
+    <input type="submit" value="Delete">
+  </form>
+  <br>
+<% end %>
+
+<br>
+<br>
+<br>
+<p><a href="/">Home</a></p>
