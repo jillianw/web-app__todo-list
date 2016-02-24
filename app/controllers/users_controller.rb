@@ -2,19 +2,18 @@
 
 # Shows the form for adding a user
 MyApp.get "/new_user" do 
-  @add_user = User.all 
-  erb :"users/new"
+  erb :"users/add"
 end
 
 # Processes the form for adding a user
-MyApp.post "/add_user" do 
+MyApp.post "/user_added" do 
   @user = User.new
   @user.name = params["name"]
   @user.email = params["email"]
   @user.password = params["password"]
   if @user.is_valid == true
     @user.save
-    erb :"users/add"
+    erb :"users/added"
   else
     erb :"users/error"
   end
@@ -23,7 +22,6 @@ end
 # Shows all users added
 MyApp.get "/all_users" do 
   @all_users = User.all 
-
   erb :"users/view_all"
 end
 
@@ -40,24 +38,25 @@ MyApp.get "/delete_user/:num" do
   @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
   @this_user_todo_lists.delete_all
   @delete_user.delete
-
   erb :"users/delete"
 end
 
 #Shows form for updating a user
 MyApp.get "/update_user/:num" do 
   @user_update = User.find_by_id(params[:num]) 
-
   erb :"users/update"
 end
 
-#Processes the form for updating a user (from view_all page)
+#Processes the form for updating a user
 MyApp.post "/updated_user/:num" do 
   @update_user = User.find_by_id(params[:num])
   @update_user.name = params["name"]
   @update_user.email = params["email"]
   @update_user.password = params["password"]
-  @update_user.save
-
-  erb :"users/updated"
+  if @update_user.is_valid == true
+    @update_user.save
+    erb :"users/updated"
+  else
+    erb :"users/error"
+  end
 end
