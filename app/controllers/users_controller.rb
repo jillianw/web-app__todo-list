@@ -10,6 +10,8 @@ end
 MyApp.post "/add_user" do 
   @user = User.new
   @user.name = params["name"]
+  @user.email = params["email"]
+  @user.password = params["password"]
   if @user.is_valid == true
     @user.save
     erb :"users/add"
@@ -23,6 +25,13 @@ MyApp.get "/all_users" do
   @all_users = User.all 
 
   erb :"users/view_all"
+end
+
+# Shows one user
+MyApp.get "/view_one/:num" do 
+  @one_user = User.find_by_id(params[:num])
+
+  erb :"users/view_one"
 end
 
 # Processes deletion of a user
