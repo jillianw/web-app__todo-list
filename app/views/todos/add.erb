@@ -1,12 +1,28 @@
 <form action="/todo_added" method="post">
   <fieldset>
     <legend>Create a new to do list</legend>
-    <br> Title: <br>
-    <input type="text" name="title"> <br>
-    <br> Description: <br>
-    <input type="text" name="description"> <br>
-    <br> User ID??? <br>
-    <input type="number" name="user_id"> <br>
+    <p> 
+        Title: 
+    </p>
+    <input type="text" name="title"> 
+    
+    <p>
+        Description:
+    </p>
+    <input type="text" name="description"> 
+    
+    <p>
+        Task Owner:
+        <select name="user_id">
+            <option>Select an owner...</option>
+
+            <% @users.each do |user| %>
+                <option value="<%= user.id %>">
+                <%=user.name %></option>
+            <% end %>
+        </select>
+    </p>
+   
     <input type="submit">
   </fieldset>
 </form>

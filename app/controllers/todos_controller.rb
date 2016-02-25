@@ -2,6 +2,7 @@
 
 # Shows the form for adding a to do list
 MyApp.get "/new_todo" do 
+  @users = User.all
   erb :"todos/add"
 end
 
