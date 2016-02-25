@@ -20,9 +20,10 @@ MyApp.post "/todo_added" do
   end
 end
 
-# Shows all to do lists added by user
-MyApp.get "/all_todos/:num" do 
-  @user_todo_lists = Todo.where({"user_id" => params[:num]})
+# Shows all to do lists
+MyApp.get "/all_todos" do 
+  @todo_lists = Todo.all
+  @todo_users = User.all
   erb :"todos/view_all"
 end
 
@@ -61,3 +62,5 @@ MyApp.post "/updated_todo/:num" do
     erb :"todos/update_error"
   end
 end
+
+#GENERIC REQUESTS HAVE TO GO AT BOTTOM SO AS NOT TO GET CAUGHT ON /:NUM ETC.
