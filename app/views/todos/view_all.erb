@@ -1,0 +1,16 @@
+<p>All To Do Lists:</p>
+
+<% @user_todo_lists do |x| %>
+ 
+  <form action="delete_todo/<%= x.id %>" method "get">
+    <input type="submit" value="Delete">
+  </form>
+    <form action="update_todo/<%= x.id %>" method "post">
+    <input type="submit" value="Update">
+  </form>
+<% end %>
+
+<br>
+<br>
+<br>
+<p><a href="/">Home</a></p>

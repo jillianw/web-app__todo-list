@@ -15,7 +15,7 @@ MyApp.post "/user_added" do
     @user.save
     erb :"users/added"
   else
-    erb :"users/error"
+    erb :"users/add_error"
   end
 end
 
@@ -57,6 +57,6 @@ MyApp.post "/updated_user/:num" do
     @update_user.save
     erb :"users/updated"
   else
-    erb :"users/error"
+    erb :"users/update_error"
   end
 end

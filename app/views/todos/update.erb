@@ -1,0 +1,18 @@
+<p>Update user information:</p>
+<br>
+
+<form action="/updated_todo/<%= @todo_update.id %>" method="post">
+  <p>
+    Title:
+    <input type="text" name="title" value="<%= @todo_update.title %>">
+  </p>
+  <p> 
+    Description:
+    <input type="text" name="description" value="<%= @todo_update.description %>">
+  </p>
+  <p> 
+    CHECKBOX FOR COMPLETED GOES HERE:
+    <input type="" name="" value="<%=  %>">
+  </p>
+  <input type ="submit">
+</form>
