@@ -13,7 +13,7 @@ MyApp.post "/user_added" do
   @user.password = params["password"]
   if @user.is_valid == true
     @user.save
-    erb :"users/added"
+    redirect "/view_user/#{@user.id}"
   else
     erb :"users/add_error"
   end
@@ -31,33 +31,53 @@ MyApp.get "/all_users" do
 end
 
 # Shows one user
-MyApp.get "/view_one/:num" do 
-  @one_user = User.find_by_id(params[:num])
-
-  erb :"users/view_one"
+MyApp.get "/view_user/:num" do 
+  @current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
+    @one_user = User.find_by_id(params[:num])
+    erb :"users/view_one"
+  else
+    erb :"please_login"
+  end  
 end
 
 # Processes deletion of a user (from view_all page)
-MyApp.get "/delete_user/:num" do
-  @delete_user = User.find_by_id(params[:num]) 
-  @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
-  @this_user_todo_lists.delete_all
-  @delete_user.delete
-  erb :"users/delete"
+MyApp.post "/delete_user/:num" do
+  @current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
+    @delete_user = User.find_by_id(params[:num]) 
+    @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
+    @this_user_todo_lists.delete_all
+    @delete_user.delete
+    erb :"users/delete"
+  else
+    erb :"please_login"
+  end  
 end
 
 #Shows form for updating a user
 MyApp.get "/update_user/:num" do 
-  @user_update = User.find_by_id(params[:num]) 
-  erb :"users/update"
+  @current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
+    @user_update = User.find_by_id(params[:num]) 
+    erb :"users/update"
+  else
+    erb :"please_login"
+  end  
 end
 
 #Processes the form for updating a user
 MyApp.post "/updated_user/:num" do 
-  @update_user = User.find_by_id(params[:num])
-  @update_user.name = params["name"]
-  @update_user.email = params["email"]
-  @update_user.password = params["password"]
+  @current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
+    @update_user = User.find_by_id(params[:num])
+    @update_user.name = params["name"]
+    @update_user.email = params["email"]
+    @update_user.password = params["password"]
+  else
+    erb :"please_login"
+  end  
+
   if @update_user.is_valid == true
     @update_user.save
     erb :"users/updated"

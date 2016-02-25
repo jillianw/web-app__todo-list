@@ -2,14 +2,14 @@
 
 <% @all_users.each do |x| %>
   <p>
-    <a href="view_one/<%= x.id %>">
+    <a href="view_user/<%= x.id %>">
       <%= x.name %>
     </a>
   </p>
-  <form action="delete_user/<%= x.id %>" method "get">
+  <form action="delete_user/<%= x.id %>" method "post">
     <input type="submit" value="Delete">
   </form>
-    <form action="update_user/<%= x.id %>" method "post">
+    <form action="update_user/<%= x.id %>" method "get">
     <input type="submit" value="Update">
   </form>
 <% end %>

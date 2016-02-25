@@ -45,7 +45,7 @@ MyApp.get "/all_todos" do
 end
 
 # Shows one to do list NEED THIS?????
-MyApp.get "/view_one/:num" do 
+MyApp.get "/view_todo/:num" do 
   @one_user = Todo.find_by_id(params[:num])
 
   erb :"todos/view_one"
@@ -57,7 +57,7 @@ MyApp.post "/delete_todo/:num" do
   if session["user_id"] != nil
     @delete_todo = Todo.find_by_id(params[:num]) 
     @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
-    @this_user_todo_lists.delete_all
+    @this_user_todo_lists.delete_all 
     @delete_todo.delete
     erb :"todos/delete"
   else
