@@ -21,8 +21,13 @@ end
 
 # Shows all users added
 MyApp.get "/all_users" do 
-  @all_users = User.all 
-  erb :"users/view_all"
+@current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
+    @all_users = User.all 
+    erb :"users/view_all"
+  else
+    erb :"please_login"
+  end
 end
 
 # Shows one user

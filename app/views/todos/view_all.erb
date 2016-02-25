@@ -10,7 +10,7 @@
   <p><i><%= x.description %></i></p>
   
 
-  <form action="delete_todo/<%= x.id %>" method="get">
+  <form action="delete_todo/<%= x.id %>" method="post">
     <input type="submit" value="Delete">
   </form>
     <form action="update_todo/<%= x.id %>" method="get">
