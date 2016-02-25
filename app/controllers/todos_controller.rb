@@ -2,17 +2,30 @@
 
 # Shows the form for adding a to do list
 MyApp.get "/new_todo" do 
-  @users = User.all
-  erb :"todos/add"
+  @current_user = User.find_by_id(session["user_id"])
+  
+  if session["user_id"] != nil
+    @users = User.all
+    erb :"todos/add"
+  else
+    erb :"please_login"
+  end
 end
 
 # Processes the form for adding a to do list
 MyApp.post "/todo_added" do 
-  @todo = Todo.new
-  @todo.title = params["title"]
-  @todo.description = params["description"]
-  @todo.completed = false
-  @todo.user_id = params["user_id"]
+  @current_user = User.find_by_id(session["user_id"])
+  
+  if session["user_id"] != nil
+    @todo = Todo.new
+    @todo.title = params["title"]
+    @todo.description = params["description"]
+    @todo.completed = false
+    @todo.user_id = params["user_id"]
+  else
+    erb :"please_login"
+  end
+  
   if @todo.is_valid == true
     @todo.save
     erb :"todos/added"
@@ -56,6 +69,7 @@ MyApp.post "/updated_todo/:num" do
   @update_todo.title = params["title"]
   @update_todo.description = params["description"]
   @update_todo.user_id = params["user_id"]
+  
   if @update_todo.is_valid == true
     @update_todo.save
     erb :"todos/updated"
