@@ -34,13 +34,8 @@ end
 
 # Shows one user
 MyApp.get "/view_user/:num" do 
-  @current_user = User.find_by_id(session["user_id"])
-  if session["user_id"] != nil
-    @one_user = User.find_by_id(params[:num])
-    erb :"users/view_one"
-  else
-    erb :"please_login"
-  end  
+  @one_user = User.find_by_id(params[:num])
+  erb :"users/view_one" 
 end
 
 # Processes deletion of a user (from view_all page)

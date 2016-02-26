@@ -43,10 +43,9 @@ MyApp.get "/all_todos" do
   end
 end
 
-# Shows one to do list NEED THIS?????
+# Shows one to do list
 MyApp.get "/view_todo/:num" do 
   @one_todo = Todo.find_by_id(params[:num])
-
   erb :"todos/view_one"
 end
 

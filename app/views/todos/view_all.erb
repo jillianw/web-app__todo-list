@@ -5,8 +5,8 @@
 
 <% @todo_lists.each do |x| %>
   <p>
-    <a href="all_todos/<%= x.id %>"><%= x.title %></a>
-    : <%= @todo_lists.user_name %> 
+    <a href="view_todo/<%= x.id %>"><%= x.title %></a>
+    : <%= x.user_name %> 
   </p>
   <p><i><%= x.description %></i></p>
   
@@ -24,5 +24,4 @@
 <br>
 <br>
 <p><a href="/">Home</a></p>
-
 
