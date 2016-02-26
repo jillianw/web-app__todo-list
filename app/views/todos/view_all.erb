@@ -5,10 +5,8 @@
 
 <% @todo_lists.each do |x| %>
   <p>
-    <a href="all_todos/<%= x.id %>">
-      <%= x.title %>
-    </a>
-    : <%= x.user_id %> 
+    <a href="all_todos/<%= x.id %>"><%= x.title %></a>
+    : <%= @todo_lists.user_name %> 
   </p>
   <p><i><%= x.description %></i></p>
   

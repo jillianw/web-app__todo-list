@@ -18,4 +18,10 @@ class Todo < ActiveRecord::Base
       return true
     end
   end
+
+  def user_name
+    x = self.user_id
+    y = User.find_by_id(x)
+    return y.name
+  end
 end

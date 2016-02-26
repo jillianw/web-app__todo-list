@@ -37,7 +37,6 @@ MyApp.get "/all_todos" do
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
     @todo_lists = Todo.all
-    @todo_users = User.all
     erb :"todos/view_all"
   else
     erb :"please_login"
@@ -46,7 +45,7 @@ end
 
 # Shows one to do list NEED THIS?????
 MyApp.get "/view_todo/:num" do 
-  @one_user = Todo.find_by_id(params[:num])
+  @one_todo = Todo.find_by_id(params[:num])
 
   erb :"todos/view_one"
 end
