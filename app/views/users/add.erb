@@ -1,3 +1,7 @@
+<a href="/logins/delete">Log out</a>
+<br>
+<br>
+
 <% if @user != nil %>
   <% @user.get_errors.each do | error_message| %>
     <p><%= error_message %></p>
