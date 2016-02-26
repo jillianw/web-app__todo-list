@@ -15,7 +15,9 @@ MyApp.post "/user_added" do
     @user.save
     redirect "/view_user/#{@user.id}"
   else
-    erb :"users/add_error"
+    #return error message
+
+    erb :"users/add"
   end
 end
 

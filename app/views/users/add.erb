@@ -1,3 +1,9 @@
+<% if @user != nil %>
+  <% @user.get_errors.each do | error_message| %>
+    <p><%= error_message %></p>
+  <% end %>
+<% end %> 
+
 <form action="/user_added" method="post">
   <fieldset>
     <legend>Create a new user</legend>
