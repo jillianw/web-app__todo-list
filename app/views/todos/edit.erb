@@ -4,14 +4,14 @@
 <p>Update To Do details:</p>
 <br>
 
-<form action="/updated_todo/<%= @todo_update.id %>" method="post">
+<form action="/todos/<%= @todo.id %>/update" method="post">
   <p>
     Title:
-    <input type="text" name="title" value="<%= @todo_update.title %>">
+    <input type="text" name="title" value="<%= @todo.title %>">
   </p>
   <p> 
     Description:
-    <input type="text" name="description" value="<%= @todo_update.description %>">
+    <input type="text" name="description" value="<%= @todo.description %>">
   </p>
   <p>  
     Task Owner:
@@ -37,7 +37,7 @@
   </p>
   <p> 
     Completed?
-    <input type="checkbox" name="completed" value="<%= @todo_update.completed %>">
+    <input type="checkbox" name="completed" value="<%= @todo.completed %>">
   </p>
   <input type ="submit">
 </form> 

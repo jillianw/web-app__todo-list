@@ -1,4 +1,14 @@
-<form action="/todo_added" method="post">
+<a href="/logins/delete">Log out</a>
+<br>
+<br>
+
+<% if @todo != nil %>
+  <% @todo.get_errors.each do | error_message| %>
+    <p><b><%= error_message %></b></p>
+  <% end %>
+<% end %> 
+
+<form action="/todos/create" method="post">
   <fieldset>
     <legend>Create a new to do list</legend>
     <p> 
@@ -16,7 +26,7 @@
         <select name="user_id">
             <option>Select an owner...</option>
 
-            <% @users.each do |user| %>
+            <% @user.each do |user| %>
                 <option value="<%= user.id %>">
                 <%= user.name %></option>
             <% end %>

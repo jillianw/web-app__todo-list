@@ -1,7 +1,7 @@
 ERROR
 
-<% @update_todo.get_errors.each do | error_message| %>
+<% @todo.get_errors.each do | error_message| %>
   <p><%= error_message %></p>
 <% end %> 
 <br>
-<p><a href="/new_todo">Go back</a></p>
+<p><a href="/todos/new">Go back</a></p>

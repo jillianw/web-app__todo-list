@@ -1,19 +1,19 @@
 # This controller is for all the CRUD operations related to a Todo.
 
 # Shows the form for adding a to do list
-MyApp.get "/new_todo" do 
+MyApp.get "/todos/new" do 
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
-    @users = User.all
+    @user = User.all
     @categories = Category.all 
-    erb :"todos/add"
+    erb :"todos/new"
   else
     erb :"please_login"
   end
 end
 
 # Processes the form for adding a to do list
-MyApp.post "/todo_added" do 
+MyApp.post "/todos/create" do 
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
     @todo = Todo.new
@@ -28,43 +28,45 @@ MyApp.post "/todo_added" do
   
   if @todo.is_valid == true
     @todo.save
-    erb :"todos/added"
+    redirect "/todos/#{@todo.id}"
   else
-    erb :"todos/add_error"
+    # return error message
+    erb :"todos/new"
   end
 end
 
+
 # Shows all to do lists
-MyApp.get "/all_todos" do 
+MyApp.get "/todos" do 
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
-    @todo_lists = Todo.all
+    @todos = Todo.all
     @todo_categories = Category.all 
-    erb :"todos/view_all"
+    erb :"todos/index"
   else
     erb :"please_login"
   end
 end
 
 # Shows one to do list
-MyApp.get "/view_todo/:num" do 
+MyApp.get "/todos/:id" do 
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
-    @one_todo = Todo.find_by_id(params[:num])
-    erb :"todos/view_one"
+    @todo = Todo.find_by_id(params[:id])
+    erb :"todos/show"
   else
     erb :"please_login"
   end   
 end
 
-# Processes deletion of a to do list (from view_all page)
-MyApp.post "/delete_todo/:num" do
+# Processes deletion of a to do list (from index page)
+MyApp.post "/todos/:id/delete" do
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
-    @delete_todo = Todo.find_by_id(params[:num]) 
-    @this_user_todo_lists = Todo.where({"user_id" => params[:num]})
+    @todo = Todo.find_by_id(params[:id]) 
+    @this_user_todo_lists = Todo.where({"user_id" => params[:id]})
     @this_user_todo_lists.delete_all 
-    @delete_todo.delete
+    @todo.delete
     erb :"todos/delete"
   else
     erb :"please_login"
@@ -72,37 +74,37 @@ MyApp.post "/delete_todo/:num" do
 end
 
 #Shows form for updating a to do list
-MyApp.get "/update_todo/:num" do 
+MyApp.get "/todos/:id/edit" do 
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
-    @todo_update = Todo.find_by_id(params[:num]) 
+    @todo = Todo.find_by_id(params[:id]) 
     @todo_owner = User.all
     @todo_category_update = Category.all 
-    erb :"todos/update"
+    erb :"todos/edit"
   else
     erb :"please_login"
   end
 end
 
 #Processes the form for updating a to do list
-MyApp.post "/updated_todo/:num" do 
+MyApp.post "/todos/:id/update" do 
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
-    @update_todo = Todo.find_by_id(params[:num])
-    @update_todo.title = params["title"]
-    @update_todo.description = params["description"]
-    @update_todo.user_id = params["user_id"]
-    @update_todo.category_id = params["category_id"]
+    @todo = Todo.find_by_id(params[:id])
+    @todo.title = params["title"]
+    @todo.description = params["description"]
+    @todo.user_id = params["user_id"]
+    @todo.category_id = params["category_id"]
   else
     erb :"please_login"
   end
   
-  if @update_todo.is_valid == true
-    @update_todo.save
+  if @todo.is_valid == true
+    @todo.save
     erb :"todos/updated"
   else
     erb :"todos/update_error"
   end
 end
 
-#GENERIC REQUESTS HAVE TO GO AT BOTTOM SO AS NOT TO GET CAUGHT ON /:NUM ETC.
+#GENERIC REQUESTS HAVE TO GO AT BOTTOM SO AS NOT TO GET CAUGHT ON /:id ETC.

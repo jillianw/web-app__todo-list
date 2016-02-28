@@ -3,18 +3,18 @@
 <br>
 <h2>All To Do Lists:</h2>
 
-<% @todo_lists.each do |x| %>
+<% @todos.each do |x| %>
   <p>
-    <a href="view_todo/<%= x.id %>"><%= x.title %> </a>
+    <a href="todos/<%= x.id %>"><%= x.title %> </a>
     : <%= x.user_name %> 
   </p>
   <p><i> <%= x.description %> </i></p>
   <p>Category: <%= x.category_name %></p>
 
-  <form action="delete_todo/<%= x.id %>" method="post">
+  <form action="todos/<%= x.id %>/delete" method="post">
     <input type="submit" value="Delete">
   </form>
-    <form action="update_todo/<%= x.id %>" method="get">
+    <form action="todos/<%= x.id %>/edit" method="get">
     <input type="submit" value="Update">
   </form>
   <br>

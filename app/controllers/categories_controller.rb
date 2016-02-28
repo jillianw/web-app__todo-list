@@ -33,7 +33,7 @@ MyApp.get "/categories" do
 @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
     @all_categories = Category.all 
-    erb :"categories/view_all"
+    erb :"categories/index"
   else
     erb :"please_login"
   end
@@ -42,10 +42,10 @@ end
 # Shows one category
 MyApp.get "/categories/:id" do 
   @one_category = Category.find_by_id(params[:id])
-  erb :"categories/view_one" 
+  erb :"categories/show" 
 end
 
-# Processes deletion of a category (from view_all page)
+# Processes deletion of a category (from index page)
 MyApp.post "/categories/:id/delete" do
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
