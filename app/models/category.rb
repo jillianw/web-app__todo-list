@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Category < ActiveRecord::Base
   def get_errors
     return @errors
   end
@@ -7,12 +7,6 @@ class User < ActiveRecord::Base
     @errors = []
     if self.name == ""
       @errors << "Name cannot be blank"
-    end
-    if self.email == ""
-      @errors << "Email cannot be blank"
-    end
-    if self.password == ""
-      @errors << "Password cannot be blank"
     end
   end
 

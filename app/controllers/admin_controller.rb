@@ -10,7 +10,7 @@ MyApp.get "/admin" do
   @current_user = User.find_by_id(session["user_id"])
   
   if session["user_id"] != nil
-    erb :"users/admin"
+    erb :"admin"
   else
     erb :"please_login"
   end

@@ -1,0 +1,24 @@
+<a href="/logins/delete">Log out</a>
+<br>
+<br>
+<h2>All To Do List Categories:</h2>
+
+<% @all_categories.each do |x| %>
+  <p>
+    <a href="view_todo/<%= x.id %>"><%= x.name %></a>
+  </p>
+  
+
+  <form action="categories/<%= x.id %>/delete" method="post">
+    <input type="submit" value="Delete">
+  </form>
+    <form action="categories/<%= x.id %>/edit" method="get">
+    <input type="submit" value="Update">
+  </form>
+  <br>
+<% end %>
+
+<br>
+<br>
+<br>
+<p><a href="/">Home</a></p>

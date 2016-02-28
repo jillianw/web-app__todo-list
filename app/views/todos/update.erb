@@ -1,7 +1,7 @@
 <a href="/logins/delete">Log out</a>
 <br>
 <br>
-<p>Update user information:</p>
+<p>Update To Do details:</p>
 <br>
 
 <form action="/updated_todo/<%= @todo_update.id %>" method="post">
@@ -12,6 +12,17 @@
   <p> 
     Description:
     <input type="text" name="description" value="<%= @todo_update.description %>">
+  </p>
+  <p>
+      Category:
+      <select name="category">
+          <option>Select an category...</option>
+
+          <% @categories.each do |x| %>
+              <option value="<%= x.category %>">
+              <%=x.category %></option>
+          <% end %>
+      </select>
   </p>
   <p> 
     Completed?

@@ -1,0 +1,13 @@
+<a href="/logins/delete">Log out</a>
+<br>
+<br>
+<p>Update Category:</p>
+<br>
+
+<form action="/categories/<%= @category_update.id %>/update" method="post">
+  <p>
+    Name:
+    <input type="text" name="name" value="<%= @category_update.name %>">
+  </p>
+  <input type ="submit">
+</form> 

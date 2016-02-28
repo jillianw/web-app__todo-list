@@ -5,6 +5,7 @@ MyApp.get "/new_todo" do
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
     @users = User.all
+    @categories = Todo.all 
     erb :"todos/add"
   else
     erb :"please_login"
@@ -45,8 +46,13 @@ end
 
 # Shows one to do list
 MyApp.get "/view_todo/:num" do 
-  @one_todo = Todo.find_by_id(params[:num])
-  erb :"todos/view_one"
+  @current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
+    @one_todo = Todo.find_by_id(params[:num])
+    erb :"todos/view_one"
+  else
+    erb :"please_login"
+  end   
 end
 
 # Processes deletion of a to do list (from view_all page)
