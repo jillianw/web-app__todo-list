@@ -26,10 +26,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "updated_at",  null: false
     t.string   "title"
     t.text     "description"
+    t.integer  "category_id"
     t.boolean  "completed"
     t.integer  "user_id"
-    t.text     "category"
-    t.integer  "category_id"
   end
 
   create_table "users", force: :cascade do |t|

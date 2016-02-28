@@ -14,4 +14,4 @@ DB.define_column("todos", "user_id", "integer")
 
 
 DB.define_table("categories")
-DB.define_column("categories", "name", "text")
+DB.define_column("categories", "name", "string")

@@ -5,11 +5,11 @@
 
 <% @todo_lists.each do |x| %>
   <p>
-    <a href="view_todo/<%= x.id %>"><%= x.title %></a>
+    <a href="view_todo/<%= x.id %>"><%= x.title %> </a>
     : <%= x.user_name %> 
   </p>
-  <p><i><%= x.description %></i></p>
-  
+  <p><i> <%= x.description %> </i></p>
+  <p>Category: <%= x.category_name %></p>
 
   <form action="delete_todo/<%= x.id %>" method="post">
     <input type="submit" value="Delete">
@@ -19,6 +19,8 @@
   </form>
   <br>
 <% end %>
+
+
 
 <br>
 <br>

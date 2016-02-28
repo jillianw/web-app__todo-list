@@ -13,16 +13,27 @@
     Description:
     <input type="text" name="description" value="<%= @todo_update.description %>">
   </p>
-  <p>
-      Category:
-      <select name="category">
-          <option>Select an category...</option>
+  <p>  
+    Task Owner:
+    <select name="user_id">
+      <option>Select an owner...</option>
 
-          <% @categories.each do |x| %>
-              <option value="<%= x.category %>">
-              <%=x.category %></option>
-          <% end %>
-      </select>
+      <% @todo_owner.each do |owner| %>
+        <option value="<%= owner.id %>">
+        <%= owner.name %></option>
+      <% end %>
+    </select>
+  </p>
+  <p>
+    Category:
+    <select name="category_id">
+      <option>Select a category...</option>
+
+      <% @todo_category_update.each do |x| %>
+        <option value="<%= x.id %>">
+        <%= x.name %></option>
+      <% end %>
+    </select>
   </p>
   <p> 
     Completed?

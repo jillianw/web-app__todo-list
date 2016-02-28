@@ -10,19 +10,31 @@
         Description:
     </p>
     <input type="text" name="description"> 
-    
-    <p>
+  
+    <p>  <br>
         Task Owner:
         <select name="user_id">
             <option>Select an owner...</option>
 
             <% @users.each do |user| %>
                 <option value="<%= user.id %>">
-                <%=user.name %></option>
+                <%= user.name %></option>
             <% end %>
         </select>
     </p>
-   
+    <br>
+   <p>
+    Category:
+    <select name="category_id">
+      <option>Select a category...</option>
+
+      <% @categories.each do |x| %>
+        <option value="<%= x.id %>">
+        <%= x.name %></option>
+      <% end %>
+    </select>
+  </p>
+  <br>
     <input type="submit">
   </fieldset>
 </form>

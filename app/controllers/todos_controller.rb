@@ -5,7 +5,7 @@ MyApp.get "/new_todo" do
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
     @users = User.all
-    @categories = Todo.all 
+    @categories = Category.all 
     erb :"todos/add"
   else
     erb :"please_login"
@@ -21,6 +21,7 @@ MyApp.post "/todo_added" do
     @todo.description = params["description"]
     @todo.completed = false
     @todo.user_id = params["user_id"]
+    @todo.category_id = params["category_id"]
   else
     erb :"please_login"
   end
@@ -38,6 +39,7 @@ MyApp.get "/all_todos" do
   @current_user = User.find_by_id(session["user_id"])
   if session["user_id"] != nil
     @todo_lists = Todo.all
+    @todo_categories = Category.all 
     erb :"todos/view_all"
   else
     erb :"please_login"
@@ -71,8 +73,15 @@ end
 
 #Shows form for updating a to do list
 MyApp.get "/update_todo/:num" do 
+  @current_user = User.find_by_id(session["user_id"])
+  if session["user_id"] != nil
     @todo_update = Todo.find_by_id(params[:num]) 
+    @todo_owner = User.all
+    @todo_category_update = Category.all 
     erb :"todos/update"
+  else
+    erb :"please_login"
+  end
 end
 
 #Processes the form for updating a to do list
@@ -83,6 +92,7 @@ MyApp.post "/updated_todo/:num" do
     @update_todo.title = params["title"]
     @update_todo.description = params["description"]
     @update_todo.user_id = params["user_id"]
+    @update_todo.category_id = params["category_id"]
   else
     erb :"please_login"
   end

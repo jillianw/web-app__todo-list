@@ -26,8 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def todo_lists
-    x = self.id 
-    y = Todo.find_by_id(x)
-    return y.title
+    Todo.find_by_id(self.id).title #NOT WORKING
   end
 end
+
