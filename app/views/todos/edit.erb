@@ -19,8 +19,10 @@
       <option>Select an owner...</option>
 
       <% @todo_owner.each do |owner| %>
-        <option value="<%= owner.id %>">
-        <%= owner.name %></option>
+        <option value="<%= owner.id %>"> 
+          <%= "selected" if @todo.user_id == owner.id %>
+          <%= owner.name %>
+        </option>
       <% end %>
     </select>
   </p>
@@ -35,9 +37,12 @@
       <% end %>
     </select>
   </p>
-  <p> 
     Completed?
-    <input type="checkbox" name="completed" value="<%= @todo.completed %>">
+    <select name="completed">
+      <option>Select...</option> 
+      <option value="<% true %>"><%= Yes %></option>
+      <option value="<% false %>"><%= No %></option>
+      <% end %>
+    </select>
   </p>
-  <input type ="submit">
 </form> 
